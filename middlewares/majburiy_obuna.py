@@ -30,7 +30,10 @@ class Asosiy(BaseMiddleware):
         dastlabki = True
 
         for k in kanallar() :
-            holat = await tekshir(user_id=user_id,kanal_id=k)
+            try:
+    holat = await tekshir(user_id=user_id,kanal_id=k)
+except Exception:
+    holat = True
             dastlabki *= holat
             kanals = await bot.get_chat(k)
             if not holat:
