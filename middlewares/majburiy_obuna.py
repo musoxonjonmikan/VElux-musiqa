@@ -29,17 +29,17 @@ class Asosiy(BaseMiddleware):
         royxat = []
         dastlabki = True
 
-        for k in kanallar() :
-            try:
-    holat = await tekshir(user_id=user_id,kanal_id=k)
-except Exception:
-    holat = True
-            dastlabki *= holat
-            kanals = await bot.get_chat(k)
-            if not holat:
-                link = await kanals.export_invite_link()
-                button = [InlineKeyboardButton(text=f"{kanals.title}",url=f"{link}")]
-                royxat.append(button)
+        for k in kanallar():
+    try:
+        holat = await tekshir(user_id=user_id,kanal_id=k)
+    except Exception:
+        holat = True
+    dastlabki *= holat
+    kanals = await bot.get_chat(k)
+    if not holat:
+        link = await kanals.export_invite_link()
+        button = [InlineKeyboardButton(text=f"{kanals.title}",url=f"{link}")]
+        royxat.append(button)
         royxat.append([InlineKeyboardButton(text="✅ Tekshirish",callback_data="start")])
         if not dastlabki:
             await bot.send_message(chat_id=user_id,text=matn,disable_web_page_preview=True,
